@@ -42,6 +42,7 @@
     </div>
     <div class="row">
       <div class="col-md-8 breweries-table">
+        <input type="text" id="searchInput" placeholder="Поиск...">
         <table class="table">
           <thead>
             <tr>
@@ -51,7 +52,7 @@
               <th scope="col">Сайт</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="breweriesTable">
             <tr>
               <td>1</td>
               <td>AF Brew </td>
@@ -70,17 +71,19 @@
               <td>Нет</td>
               <td><a href="#">https://rewort.ru/</a></td>
             </tr>
-           <tr>
+            <tr>
               <td>4</td>
               <td>Sabotage Brewery</td>
               <td>Нет</td>
               <td><a href="#">https://www.instagram.com/sabotage_brewery/</a></td>
-              <tr>
+            </tr>
+            <tr>
               <td>5</td>
               <td>AF Brew </td>
               <td>Да</td>
               <td><a href="#">https://afbrew.co/</a></td>
-              <tr>
+            </tr>
+            <tr>
               <td>6</td>
               <td>Huyghe </td>
               <td>Да</td>
@@ -104,8 +107,6 @@
               <td>Да</td>
               <td><a href="#">https://www.brewdog.com</a></td>
             </tr>
-            </tr>
-            </tr>
           </tbody>
         </table>
         <nav aria-label="Page navigation">
@@ -119,18 +120,41 @@
         </nav>
       </div>
       <div class="col-md-4 breweries-text">
-       <p style="font-size: 17px;">Добро пожаловать в раздел нашего сайта, посвященный
- пивоварням и ассортименту пива, которое мы предлагаем в
- нашем магазине!Каждая пивоварня имеет свой 
-уникальный стиль и рецептуру, и мы уверены, что вы найдете здесь пиво, которое полностью удовлетворит ваши вкусовые предпочтения. Мы тщательно выбираем каждое пиво, которое предлагаем нашим клиентам, и гарантируем его качество и свежесть.
-В нашем списке пивоварен вы найдете как местных производителей, так и известных мировых брендов. Кроме того, мы постоянно обновляем нашу коллекцию, добавляя новые и интересные марки пива.
-Мы понимаем, что для многих наших клиентов пиво – это не только напиток, но и настоящее искусство, и мы делаем все возможное, чтобы предложить вам лучший выбор исключительного качества. 
-Если у вас есть какие-либо вопросы или запросы, пожалуйста, свяжитесь с нами, и мы с радостью поможем вам найти пиво, которое вы ищете.</p>
+        <p style="font-size: 17px;">Добро пожаловать в раздел нашего сайта, посвященный
+          пивоварням и ассортименту пива, которое мы предлагаем в
+          нашем магазине!Каждая пивоварня имеет свой 
+          уникальный стиль и рецептуру, и мы уверены, что вы найдете здесь пиво, которое полностью удовлетворит ваши вкусовые предпочтения. Мы тщательно выбираем каждое пиво, которое предлагаем нашим клиентам, и гарантируем его качество и свежесть.
+          В нашем списке пивоварен вы найдете как местных производителей, так и известных мировых брендов. Кроме того, мы постоянно обновляем нашу коллекцию, добавляя новые и интересные марки пива.
+          Мы понимаем, что для многих наших клиентов пиво – это не только напиток, но и настоящее искусство, и мы делаем все возможное, чтобы предложить вам лучший выбор исключительного качества. 
+          Если у вас есть какие-либо вопросы или запросы, пожалуйста, свяжитесь с нами, и мы с радостью поможем вам найти пиво, которое вы ищете.</p>
       </div>
     </div>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/bootstrap.min.js"></script>
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const breweriesTable = document.getElementById('breweriesTable');
+
+    searchInput.addEventListener('input', function(event) {
+      const searchText = event.target.value.toLowerCase();
+      const rows = breweriesTable.getElementsByTagName('tr');
+
+      for (let row of rows) {
+        const cells = row.getElementsByTagName('td');
+        let found = false;
+
+        for (let cell of cells) {
+          if (cell.innerText.toLowerCase().includes(searchText)) {
+            found = true;
+            break;
+          }
+        }
+
+        row.style.display = found ? '' : 'none';
+      }
+    });
+  </script>
 </body>
 </html>
